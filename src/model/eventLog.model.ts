@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export interface EventLogDocument extends mongoose.Document {
+export interface EventLog {
     type: string;
     session_id: string;
     event_name: string;
@@ -10,6 +10,9 @@ export interface EventLogDocument extends mongoose.Document {
     region: string;
     city: string;
     user_id: string;
+}
+
+export interface EventLogDocument extends EventLog, mongoose.Document {
     createdAt: Date;
     updatedAt: Date;
 }
@@ -31,6 +34,6 @@ const eventLogSchema = new mongoose.Schema(
     }
 );
 
-const EventLogModel = mongoose.model('EventLog', eventLogSchema);
+const EventLogModel = mongoose.model<EventLogDocument>('EventLog', eventLogSchema);
 
 export default EventLogModel;
